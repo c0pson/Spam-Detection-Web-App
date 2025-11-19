@@ -65,7 +65,7 @@ This prevents messy pull requests.
 
 ```bash
 ├───spam_detection
-│   ├───api         # 
+│   ├───api
 │   ├───core
 │   ├───models
 │   ├───services
