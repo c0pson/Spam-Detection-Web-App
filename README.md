@@ -12,7 +12,7 @@ Flask web application that sends text to an API and by using AI determines wheth
 **To setup the project first clone the repo:**
 
 ```bash
-git clone https://github.com/c0pson/Chess
+git clone https://github.com/c0pson/Spam-Detection-Web-App
 ```
 
 **Create python virtual environment (please use at least python3.12):**
