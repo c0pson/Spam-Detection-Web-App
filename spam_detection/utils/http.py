@@ -12,9 +12,12 @@ class ServerCommunication:
 
     @staticmethod
     def check_availability() -> bool:
-        response = requests.get(SERVER.URL + SERVER.CHECK_AVAILABILITY, timeout=5)
-        data = ServerCommunication._handle_response(response)
-        return str(data.get("available")).lower() == "true"
+        try:
+            response = requests.get(SERVER.URL + SERVER.CHECK_AVAILABILITY, timeout=2)
+            data = ServerCommunication._handle_response(response)
+            return str(data.get("available")).lower() == "true"
+        except requests.ConnectionError as e:
+            return False
 
     @staticmethod
     def check_spam(request: SpamRequest) -> dict:
