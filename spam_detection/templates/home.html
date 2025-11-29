@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <title>Spam Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <h1>Hello from Home Page!</h1>
-    <a href="/api/spam/form">Go to Spam Form</a>
+<body class="theme-light font-medium">
+
+<header class="app-header">
+    <div class="header-inner">
+        <div class="header-left">
+            <div class="logo-circle"></div>
+            <span class="header-title">
+                Spam Detector
+            </span>
+        </div>
+
+        <div class="header-right">
+            <button
+                    id="fontToggleBtn"
+                    class="icon-button font-toggle-btn"
+                    type="button"
+                    aria-label="Change font size"
+            >
+                <span class="font-toggle-symbol">
+                    <span class="font-toggle-small">aA</span>
+                    <span class="font-toggle-large">A</span>
+                </span>
+            </button>
+
+            <button
+                    id="themeToggleBtn"
+                    class="icon-button theme-toggle-btn"
+                    type="button"
+                    aria-pressed="false"
+                    aria-label="Toggle dark mode"
+            >
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="page-content">
+    <!-- ================= INITIAL SCREEN ================= -->
+    <section id="screen-initial" class="hero-section">
+        <div class="hero-inner">
+            <h1 class="hero-title">
+                Detect if your email is spam or not
+            </h1>
+
+            <div class="hero-input-area">
+                <textarea
+                        name="email_body"
+                        id="email_body"
+                        class="email-textarea"
+                        placeholder="Enter your email content here..."
+                        rows="4"
+                ></textarea>
+
+                <button
+                        id="sendBtn"
+                        class="primary-button"
+                        type="button"
+                        aria-label="Analyze email"
+                >
+                    <span class="send-icon">➤</span>
+                </button>
+
+                <div id="loadingIndicator" class="loading hidden">
+                    <div class="loading-spinner"></div>
+                    <span>Analyzing your email...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= RESULT SCREEN ================= -->
+    <section id="screen-result" class="result-section hidden">
+        <div class="result-container">
+            <!-- Status Section: SPAM / Not Spam -->
+            <div id="resultStatus" class="result-status">
+                SPAM
+            </div>
+
+            <!-- Reason Section -->
+            <div class="result-card">
+                <div id="resultReason" class="result-text">
+                </div>
+            </div>
+
+            <!-- User Prompt Section -->
+            <div class="result-card result-prompt-card">
+                <div id="resultPrompt" class="result-text result-prompt-text">
+                </div>
+
+                <button
+                        id="nextBtn"
+                        class="next-button"
+                        type="button"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="js/main.js"></script>
 </body>
 </html>
