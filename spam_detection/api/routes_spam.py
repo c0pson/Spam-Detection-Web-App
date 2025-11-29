@@ -5,7 +5,7 @@ from spam_detection.services.spam_checker import SpamService
 spam_bp = Blueprint(
     "spam",
     __name__,
-    url_prefix="/api/spam",
+    url_prefix="/",
 )
 
 @spam_bp.route("/form")
