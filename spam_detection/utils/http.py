@@ -1,6 +1,7 @@
 import requests
 from spam_detection.core.config import SERVER
 from spam_detection.models.spam_request import SpamRequest
+from requests.exceptions import ConnectionError, ReadTimeout
 
 class ServerCommunication:
     """Class to handle communication with the server for spam detection.
@@ -39,7 +40,9 @@ class ServerCommunication:
             )
             data = ServerCommunication._handle_response(response)
             return str(data.get("available")).lower() == "true"
-        except (requests.ConnectionError, requests.ReadTimeout) as e:
+        except (ConnectionError, ReadTimeout) as e:
+            return False
+        except Exception as e:
             return False
 
     @staticmethod
