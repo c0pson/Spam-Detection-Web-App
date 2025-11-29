@@ -2,9 +2,151 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>404</title>
+    <title>404 - Spam Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const savedFont = localStorage.getItem('fontSize');
+            
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('theme-dark');
+            } else {
+                document.documentElement.classList.add('theme-light');
+            }
+            
+            if (savedFont) {
+                document.documentElement.classList.add('font-' + savedFont);
+            } else {
+                document.documentElement.classList.add('font-medium');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('spam.static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h2>404 - Service is currently unavailable</h2>
+<header class="app-header">
+    <div class="header-inner">
+        <div class="header-left">
+            <div class="logo-circle"></div>
+            <span class="header-title">
+                Spam Detector
+            </span>
+        </div>
+        <div class="header-right">
+            <button
+                id="fontToggleBtn"
+                class="icon-button font-toggle-btn"
+                type="button"
+                aria-label="Change font size"
+                onclick="toggleFont()"
+            >
+                <span class="font-toggle-symbol">
+                    <span class="font-toggle-small">aA</span>
+                    <span class="font-toggle-large">A</span>
+                </span>
+            </button>
+            <button
+                id="themeToggleBtn"
+                class="icon-button theme-toggle-btn"
+                type="button"
+                aria-pressed="false"
+                aria-label="Toggle dark mode"
+                onclick="toggleTheme()"
+            >
+                <span class="icon-sun material-icons">light_mode</span>
+                <span class="icon-moon material-icons">dark_mode</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="page-content">
+    <section class="hero-section">
+        <div class="hero-inner">
+            <h1 class="hero-title" style="font-size: 6rem; margin-bottom: 1rem; background: linear-gradient(135deg, #06b6d4, #0891b2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                404
+            </h1>
+            <h2 class="hero-title" style="font-size: 1.5rem; margin-bottom: 1rem;">
+                Service is currently unavailable
+            </h2>
+            <p style="text-align: center; margin-bottom: 2rem; line-height: 1.6; color: #6b7280;">
+                We're sorry, but the spam detection service encountered an error. 
+                This could be due to a temporary network issue or the service being temporarily down. 
+                Please try again in a few moments.
+            </p>
+            <a href="{{ url_for('spam.show_form') }}" class="next-button" style="position: static; padding: 0.75rem 2rem;">
+                Return to Home
+            </a>
+        </div>
+    </section>
+</main>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const html = document.documentElement;
+    
+    if (body.classList.contains('theme-light') || html.classList.contains('theme-light')) {
+        body.classList.remove('theme-light');
+        body.classList.add('theme-dark');
+        html.classList.remove('theme-light');
+        html.classList.add('theme-dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('theme-dark');
+        body.classList.add('theme-light');
+        html.classList.remove('theme-dark');
+        html.classList.add('theme-light');
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+function toggleFont() {
+    const body = document.body;
+    const html = document.documentElement;
+    
+    if (body.classList.contains('font-small') || html.classList.contains('font-small')) {
+        body.classList.remove('font-small');
+        body.classList.add('font-medium');
+        html.classList.remove('font-small');
+        html.classList.add('font-medium');
+        localStorage.setItem('fontSize', 'medium');
+    } else if (body.classList.contains('font-medium') || html.classList.contains('font-medium')) {
+        body.classList.remove('font-medium');
+        body.classList.add('font-large');
+        html.classList.remove('font-medium');
+        html.classList.add('font-large');
+        localStorage.setItem('fontSize', 'large');
+    } else {
+        body.classList.remove('font-large');
+        body.classList.add('font-small');
+        html.classList.remove('font-large');
+        html.classList.add('font-small');
+        localStorage.setItem('fontSize', 'small');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const savedFont = localStorage.getItem('fontSize');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.remove('theme-light');
+        document.body.classList.add('theme-dark');
+    } else {
+        document.body.classList.remove('theme-dark');
+        document.body.classList.add('theme-light');
+    }
+    
+    if (savedFont) {
+        document.body.classList.remove('font-small', 'font-medium', 'font-large');
+        document.body.classList.add('font-' + savedFont);
+    } else {
+        document.body.classList.add('font-medium');
+    }
+});
+</script>
 </body>
 </html>
