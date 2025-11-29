@@ -7,4 +7,12 @@ class SERVER(Enum):
     AVAILABLE = 200
 
     def __add__(self, other):
+        """Returns the sum of the values of two SERVER enum members.
+
+        Args:
+            other (SERVER): Another SERVER enum member to add.
+
+        Returns:
+            str: The combined value of the two enum members.
+        """
         return self.value + other.value
