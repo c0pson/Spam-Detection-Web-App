@@ -4,4 +4,4 @@ __pycache__
 .env
 mypy.ini
 .idea
-
+artifacts/datasets/

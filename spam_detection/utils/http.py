@@ -1,6 +1,6 @@
 import requests
 from spam_detection.core.config import SERVER
-from spam_detection.models.spam_request import SpamRequest
+from spam_detection.artifacts.models import SpamRequest
 from requests.exceptions import ConnectionError, ReadTimeout
 
 class ServerCommunication:

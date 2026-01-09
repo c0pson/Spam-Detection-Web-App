@@ -1,13 +1,16 @@
+from __future__ import annotations
+
 from enum import Enum
+import os
 
 class SERVER(Enum):
-    URL = "http://79.76.44.20"
+    URL = os.getenv("SPAM_SERVER_URL", "http://79.76.44.20")
     CHECK_SPAM = "/check_spam"
     CHECK_AVAILABILITY = "/check_availability"
     AVAILABLE = 200
 
-    def __add__(self, other):
-        """Returns the sum of the values of two SERVER enum members.
+    def __add__(self, other: "SERVER") -> str:
+        """Return the concatenation of two SERVER enum member values.
 
         Args:
             other (SERVER): Another SERVER enum member to add.
@@ -15,4 +18,4 @@ class SERVER(Enum):
         Returns:
             str: The combined value of the two enum members.
         """
-        return self.value + other.value
+        return str(self.value) + str(other.value)
