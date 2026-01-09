@@ -5,3 +5,4 @@ __pycache__
 mypy.ini
 .idea
 artifacts/datasets/
+artifacts/model/

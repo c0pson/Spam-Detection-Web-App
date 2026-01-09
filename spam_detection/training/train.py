@@ -88,7 +88,7 @@ def main() -> None:
 
         fp16=True,
         tf32=True,
-        torch_compile=True,
+        torch_compile=False,
 
         logging_steps=100,
         save_total_limit=2,
