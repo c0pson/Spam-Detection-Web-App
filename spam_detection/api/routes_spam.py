@@ -1,6 +1,7 @@
 import time
 from flask import Blueprint, render_template, request, make_response
 from spam_detection.services.spam_checker import SpamService
+from spam_detection.core.config import DEFAULT_TOP_K
 from requests.exceptions import ConnectionError, Timeout, RequestException
 
 spam_bp = Blueprint(
@@ -27,16 +28,28 @@ def push_resources(response):
 def show_form():
     if request.method == "POST":
         text = request.form.get("email_body", "")
+        explain_raw = (
+                request.form.get("explain")
+                or request.form.get("keywords")
+                or request.args.get("explain")
+                or request.args.get("keywords")
+        )
+        explain = str(explain_raw).lower() in {"1", "true", "yes", "on"}
         max_retries = 3
         retry_delay = 1
         for attempt in range(max_retries):
             try:
-                is_spam = SpamService.classify_text(text)
+                prediction = SpamService.classify_text(
+                    text,
+                    explain=explain,
+                    top_k=DEFAULT_TOP_K,
+                )
                 return render_template(
                     "check_spam.html",
                     show_result=True,
-                    is_spam=is_spam,
-                    user_text=text
+                    is_spam=prediction.is_spam,
+                    user_text=text,
+                    keywords=prediction.keywords,
                 )
             except (ConnectionError, ConnectionResetError, Timeout) as e:
                 if attempt == max_retries - 1:

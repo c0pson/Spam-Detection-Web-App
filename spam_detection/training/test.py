@@ -10,8 +10,8 @@ END_MARKER = "END"
 
 STOPWORDS = {
     "a", "an", "and", "are", "as", "at", "be", "but", "by",
-    "can", "could", "did", "do", "does", "doing", "down",
-    "for", "from", "had", "has", "have", "having", "he", "her", "hers",
+    "can", "com", "could", "did", "do", "does", "doing", "down",
+    "for", "from", "had", "has", "have", "having", "he", "hello", "her", "hers",
     "him", "his", "how", "https", "i", "if", "in", "into", "is", "it", "its",
     "just", "me", "more", "most", "my", "no", "not", "now", "of", "off",
     "on", "once", "only", "or", "other", "our", "out", "over", "own",

@@ -107,7 +107,20 @@
                     {% endif %}
                 </div>
             </div>
-            
+
+            {% if keywords %}
+            <div class="result-card">
+                <div class="result-text">
+                    <strong>Top keywords:</strong>
+                    <ul>
+                        {% for word, score in keywords %}
+                        <li>{{ word }} ({{ "%.3f"|format(score) }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
             <div class="result-card result-prompt-card">
                 <div class="result-text result-prompt-text">
                     <strong>Your email:</strong><br>

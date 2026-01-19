@@ -151,3 +151,17 @@ class SpamChecker:
             confidence=pred.confidence,
             keywords=keywords,
         )
+
+class SpamService:
+    _checker: Optional[SpamChecker] = None
+
+    @classmethod
+    def _get_checker(cls) -> SpamChecker:
+        if cls._checker is None:
+            cls._checker = SpamChecker()
+        return cls._checker
+
+    @classmethod
+    def classify_text(cls, text: str, explain: bool = False, top_k: int = DEFAULT_TOP_K) -> SpamPrediction:
+        checker = cls._get_checker()
+        return checker.analyze(text, explain=explain, top_k=top_k)

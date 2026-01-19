@@ -1,5 +1,6 @@
+import os
 import requests
-from spam_detection.core.config import SERVER
+from spam_detection.core.config import SERVER, MODEL_DIR
 from spam_detection.artifacts.models import SpamRequest
 from requests.exceptions import ConnectionError, ReadTimeout
 
@@ -33,6 +34,8 @@ class ServerCommunication:
         Returns:
             bool: True if server is available, False otherwise.
         """
+        if os.path.isdir(MODEL_DIR):
+            return True
         try:
             response = requests.get(
                 SERVER.URL + SERVER.CHECK_AVAILABILITY,
