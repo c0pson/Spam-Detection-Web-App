@@ -74,13 +74,24 @@
                         rows="4"
                         required
                 ></textarea>
-                <button
-                        type="submit"
-                        class="primary-button"
-                        aria-label="Analyze email"
-                >
-                    <span class="send-icon">➤</span>
-                </button>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input
+                                type="checkbox"
+                                name="explain"
+                                value="true"
+                                id="explain_checkbox"
+                        >
+                        <span>Show keywords</span>
+                    </label>
+                    <button
+                            type="submit"
+                            class="primary-button"
+                            aria-label="Analyze email"
+                    >
+                        <span class="send-icon">➤</span>
+                    </button>
+                </div>
             </form>
         </div>
     </section>

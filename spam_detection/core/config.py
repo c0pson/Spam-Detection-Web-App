@@ -24,7 +24,7 @@ class SERVER(Enum):
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MODEL_DIR = os.getenv(
     "SPAM_MODEL_DIR",
-    str(PROJECT_ROOT / "spam_detection" / "artifacts" / "model" / "gro_spam_v1"),
+    str(PROJECT_ROOT / "models" / "gro_spam_v1"),
 )
 MAX_LENGTH = int(os.getenv("SPAM_MAX_LENGTH", "256"))
 DEFAULT_TOP_K = int(os.getenv("SPAM_TOP_K", "5"))
