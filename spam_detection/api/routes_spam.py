@@ -56,6 +56,15 @@ def show_form():
                     return render_template("404.html")
                 wait_time = retry_delay * (2 ** attempt)
                 time.sleep(wait_time)
+            except RuntimeError as e:
+                if "captum" in str(e).lower():
+                    return render_template(
+                        "check_spam.html",
+                        show_result=True,
+                        error_message="Keyword extraction requires additional dependencies. Please install captum: pip install captum",
+                        is_spam=False,
+                    )
+                return render_template("404.html")
             except Exception as e:
                 return render_template("404.html")
     return render_template("check_spam.html", show_result=False)

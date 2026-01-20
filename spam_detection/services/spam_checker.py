@@ -16,6 +16,15 @@ except Exception:
 from spam_detection.core.config import MODEL_DIR, MAX_LENGTH, DEFAULT_TOP_K
 
 
+STOP_WORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "has", "he", 
+    "in", "is", "it", "its", "of", "on", "or", "that", "the", "to", "was", "will", 
+    "with", "you", "your", "this", "but", "they", "have", "had", "do", "does", "did",
+    "not", "no", "yes", "can", "could", "should", "would", "may", "might", "must",
+    "i", "me", "we", "us", "what", "which", "who", "when", "where", "why", "how"
+}
+
+
 def _merge_wordpieces(tokens: List[str], scores: List[float]) -> List[Tuple[str, float]]:
     merged: List[Tuple[str, float]] = []
     current_word = ""
@@ -45,7 +54,11 @@ def _merge_wordpieces(tokens: List[str], scores: List[float]) -> List[Tuple[str,
         current_count += 1
 
     flush()
-    merged = [(w, s) for (w, s) in merged if re.search(r"[A-Za-z0-9]", w)]
+    # Filter out non-alphanumeric words, short words, and stop words
+    merged = [
+        (w, s) for (w, s) in merged 
+        if re.search(r"[A-Za-z0-9]", w) and len(w) > 2 and w.lower() not in STOP_WORDS
+    ]
     return merged
 
 

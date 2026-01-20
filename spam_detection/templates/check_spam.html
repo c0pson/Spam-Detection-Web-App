@@ -99,6 +99,13 @@
     {% if show_result %}
     <section id="screen-result" class="result-section">
         <div class="result-container">
+            {% if error_message %}
+            <div class="result-card" style="background-color: #ffebee; border-left: 4px solid #f44336; padding: 15px;">
+                <div class="result-text" style="color: #d32f2f;">
+                    <strong>Error:</strong> {{ error_message }}
+                </div>
+            </div>
+            {% else %}
             <div class="result-status {% if is_spam %}result-status-spam{% else %}result-status-notspam{% endif %}">
                 {% if is_spam %}
                     SPAM
@@ -146,6 +153,7 @@
                     </button>
                 </form>
             </div>
+            {% endif %}
         </div>
     </section>
     {% endif %}

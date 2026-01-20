@@ -6,3 +6,4 @@ mypy.ini
 .idea
 artifacts/datasets/
 artifacts/model/
+models
