@@ -136,6 +136,4 @@ Automated test suite.
 
 ## Security goals
 
- - HTML connection between backends
- - mTLS on backends, prevents spoofing attacks
  - no emails and users logging
