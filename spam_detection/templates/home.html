@@ -27,9 +27,11 @@
 <header class="app-header">
     <div class="header-inner">
         <div class="header-left">
-            <div class="logo-circle"></div>
+            <div class="logo-circle">
+                <img src="{{ url_for('spam.static', filename='images/logo.png') }}" alt="Logo">
+            </div>
             <span class="header-title">
-                Spam Detector
+                <a href="{{ url_for('home') }}">Spam Detector</a>
             </span>
         </div>
         <div class="header-right">
