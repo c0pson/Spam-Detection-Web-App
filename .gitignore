@@ -7,3 +7,4 @@ mypy.ini
 artifacts/datasets/
 artifacts/model/
 models
+model
