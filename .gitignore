@@ -9,3 +9,4 @@ artifacts/model/
 models
 model
 logs
+.coverage
