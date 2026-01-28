@@ -49,6 +49,55 @@ pip install -r requirements.txt
 python -m spam_detection
 ```
 
+## Running tests
+
+### Run all tests:
+```bash
+pytest -q
+```
+
+### Run tests with coverage report:
+```bash
+pytest --cov=spam_detection --cov-report=term-missing -q
+```
+
+### Generate HTML coverage report:
+```bash
+pytest --cov=spam_detection --cov-report=html
+```
+
+### Run specific test phase:
+```bash
+pytest tests/test_security.py -q         # Security tests
+pytest tests/test_functional.py -q       # Functional tests
+pytest tests/test_performance.py -q      # Performance tests
+```
+
+## Running tests before app startup
+
+Automated test runners are provided to ensure tests pass before the application starts:
+
+### Windows (PowerShell):
+```powershell
+.\run_with_tests.ps1
+```
+
+### Linux / macOS:
+```bash
+bash run_with_tests.sh
+```
+
+### Cross-platform (Python):
+```bash
+python run_with_tests.py
+```
+
+All scripts will:
+1. Activate the virtual environment
+2. Run the full test suite
+3. Start the Flask app only if tests pass
+4. Exit with error code 1 if tests fail
+
 ## How to contribute 
 
 This prevents messy pull requests.
