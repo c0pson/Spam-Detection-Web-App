@@ -1,3 +1,14 @@
+"""Configuration module for spam detection application.
+
+This module defines application-wide configuration constants including:
+- Model directory and parameters
+- Logging configuration
+- Text processing parameters (stop words, max length)
+- Environment variable defaults
+
+All configuration values can be overridden via environment variables.
+"""
+
 import os
 from pathlib import Path
 

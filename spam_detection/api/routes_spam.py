@@ -1,3 +1,18 @@
+"""Spam detection API routes.
+
+This module provides Flask blueprint routes for the spam detection service,
+including endpoints for checking spam messages and displaying the spam
+detection form. It handles:
+
+- GET/POST requests to the form page
+- Text validation and retry logic for service failures
+- Response rendering with spam predictions
+- HTTP header optimization with resource preloading
+
+Routes:
+    /form: GET/POST endpoint for spam detection form and processing
+"""
+
 import time
 from flask import Blueprint, render_template, request
 from spam_detection.services.spam_checker import SpamService
@@ -16,6 +31,17 @@ spam_bp = Blueprint(
 
 @spam_bp.after_request
 def push_resources(response):
+    """Add preload headers for static resources.
+
+    Optimizes page load performance by preloading CSS stylesheets and
+    Material Icons in the HTTP headers.
+
+    Args:
+        response: Flask response object.
+
+    Returns:
+        Flask.Response: Modified response with preload headers.
+    """
     if response.status_code == 200 and 'text/html' in response.content_type:
         response.headers.add(
             'Link', 
@@ -29,6 +55,27 @@ def push_resources(response):
 
 @spam_bp.route("/form", methods=["GET", "POST"])
 def show_form():
+    """Handle spam detection form display and text classification.
+
+    Processes form submissions by classifying text using the SpamService.
+    Implements exponential backoff retry logic for transient service failures.
+    Renders results or error pages based on classification outcome.
+
+    For POST requests:
+    - Extracts email body text from form
+    - Retries classification up to 3 times on connection errors
+    - Returns spam prediction with confidence and keywords if available
+    - Falls back to 404 error page on persistent failures
+
+    For GET requests:
+    - Returns blank form for user input
+
+    Returns:
+        str: Rendered HTML template (check_spam.html or 404.html)
+
+    Raises:
+        None: All errors are caught and returned as 404 error pages.
+    """
     if request.method == "POST":
         text = request.form.get("email_body", "")
         logger.info(f"Processing spam check request with text length: {len(text)}")

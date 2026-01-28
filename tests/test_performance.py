@@ -3,13 +3,11 @@ import time
 from spam_detection.main import create_app
 from spam_detection.services.spam_checker import SpamService, SpamPrediction
 
-
 @pytest.fixture
 def client():
     app = create_app()
     app.testing = True
     return app.test_client()
-
 
 @pytest.fixture(autouse=True)
 def mock_spam_service(monkeypatch):
@@ -24,7 +22,6 @@ def mock_spam_service(monkeypatch):
         )
 
     monkeypatch.setattr(SpamService, "classify_text", classmethod(fake_classify))
-
 
 class TestPerformance:
     """Performance and benchmark tests."""

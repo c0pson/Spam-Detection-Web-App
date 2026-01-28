@@ -3,7 +3,6 @@ from requests.exceptions import ConnectionError
 
 from spam_detection.services.spam_checker import SpamPrediction
 
-
 @pytest.fixture
 def client(monkeypatch):
     from spam_detection.main import create_app
@@ -17,7 +16,6 @@ def client(monkeypatch):
     monkeypatch.setattr(routes_spam.time, "sleep", lambda _s: None)
 
     return app.test_client()
-
 
 @pytest.fixture(autouse=True)
 def default_mock(monkeypatch):
@@ -33,12 +31,10 @@ def default_mock(monkeypatch):
 
     monkeypatch.setattr("spam_detection.services.spam_checker.SpamService.classify_text", classmethod(fake_classify))
 
-
 def test_get_form_shows_textarea(client):
     resp = client.get("/form")
     assert resp.status_code == 200
     assert b'name="email_body"' in resp.data
-
 
 def test_post_form_not_spam_shows_not_spam_and_no_keywords(client):
     resp = client.post("/form", data={"email_body": "Hello there"})
@@ -46,7 +42,6 @@ def test_post_form_not_spam_shows_not_spam_and_no_keywords(client):
     assert b"Not Spam" in resp.data
     # keywords block should not be present for non-spam results
     assert b"Top keywords" not in resp.data
-
 
 def test_post_form_spam_shows_keywords_and_user_text(client, monkeypatch):
     def spammy(cls, text, explain=False, top_k=5):
@@ -67,7 +62,6 @@ def test_post_form_spam_shows_keywords_and_user_text(client, monkeypatch):
     assert b"winner" in resp.data
     # user text should be echoed
     assert text.encode("utf-8") in resp.data
-
 
 def test_retry_on_transient_errors(client, monkeypatch):
     calls = {"count": 0}

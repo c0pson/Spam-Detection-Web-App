@@ -15,7 +15,6 @@ def client():
     app.testing = True
     return app.test_client()
 
-
 @pytest.fixture(autouse=True)
 def mock_spam_service(monkeypatch):
     """Mock SpamService.classify_text to avoid model loading."""
@@ -33,7 +32,6 @@ def mock_spam_service(monkeypatch):
         "classify_text",
         classmethod(fake_classify),
     )
-
 
 # -----------------------------
 # XSS tests
@@ -64,14 +62,12 @@ class TestSecurityXSS:
         assert payload.encode("utf-8") not in resp.data
         assert escaped_marker in resp.data
 
-
 # -----------------------------
 # Input validation tests
 # -----------------------------
 
 class TestSecurityInputValidation:
     """Input validation edge-case tests."""
-
     @pytest.mark.parametrize(
         "payload",
         [

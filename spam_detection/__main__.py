@@ -1,3 +1,14 @@
+"""Application entry point for the spam detection service.
+
+This module initializes and runs the Flask web application. It can be executed
+via: python -m spam_detection
+
+The application provides a web interface for spam detection with:
+- Form-based text submission
+- Real-time spam classification
+- Optional keyword extraction
+"""
+
 from spam_detection.main import create_app
 from spam_detection.core.logger import Logger
 
