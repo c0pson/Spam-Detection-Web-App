@@ -1,0 +1,28 @@
+Split: test
+Threshold: 0.300
+accuracy: 0.993270
+f1: 0.992095
+fn: 16
+fnr: 0.010512
+fp: 8
+fpr: 0.003914
+npv: 0.992203
+precision: 0.994716
+recall: 0.989488
+specificity: 0.996086
+tn: 2036
+tp: 1506
+
+Explanations:
+accuracy: (TP + TN) / (TP + TN + FP + FN)
+precision: TP / (TP + FP)
+recall: TP / (TP + FN)
+f1: harmonic mean of precision and recall
+specificity: TN / (TN + FP)
+fpr: FP / (FP + TN)
+fnr: FN / (FN + TP)
+npv: TN / (TN + FN)
+tp: true positives (spam predicted as spam)
+tn: true negatives (ham predicted as ham)
+fp: false positives (ham predicted as spam)
+fn: false negatives (spam predicted as ham)
