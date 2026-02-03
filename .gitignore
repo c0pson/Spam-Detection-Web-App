@@ -10,3 +10,6 @@ models
 model
 logs
 .coverage
+docs/*.png
+docs/*.jpg
+docs/*.md
